@@ -1,0 +1,11 @@
+- name: Update and upgrade Homebrew
+  homebrew: update_homebrew=yes upgrade_all=yes
+
+- name: Homebrew install packages
+  homebrew: name={{ item }} state=latest
+  with_items:
+    - git
+    - wget
+    - python
+    - python3
+    - vim

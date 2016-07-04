@@ -1,0 +1,23 @@
+- name: Creating files dirs
+  file: path={{ item }} state=directory mode=755
+  with_items:
+    - "{{ dotfiles_dir }}"
+    - "{{ gitfiles_dir }}"
+
+- name: Copy dotfiles
+  copy: src=files/dotfiles/ dest={{ dotfiles_dir  }} mode=744
+
+- name: Copy gitfiles to home dir
+  copy: src=files/gitfiles/ dest={{ gitfiles_dir }} mode=744
+
+- name: Copy git files
+  shell: cd {{ gitfiles_dir }} && wget {{ item }}
+  with_items:
+    - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
+    - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
+
+- name: Copy bashrc
+  template: src=templates/bashrc.tpl dest=~/.bashrc
+
+- name: Copy gitconfig
+  template: src=templates/gitconfig.tpl dest=~/.gitconfig

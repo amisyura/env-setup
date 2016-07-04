@@ -1,0 +1,4 @@
+- name: Create development dirictory
+  file: path=~/dev state=directory mode=0755
+
+

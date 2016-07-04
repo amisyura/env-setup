@@ -1,5 +1,7 @@
 - name: Update and upgrade Homebrew
   homebrew: update_homebrew=yes upgrade_all=yes
+  tags:
+    - with_update
 
 - name: Homebrew install packages
   homebrew: name={{ item }} state=latest

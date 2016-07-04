@@ -5,10 +5,10 @@
     - "{{ gitfiles_dir }}"
 
 - name: Copy dotfiles
-  copy: src=files/dotfiles/ dest={{ dotfiles_dir  }} mode=744
+  copy: src=dotfiles/ dest={{ dotfiles_dir  }} mode=744
 
 - name: Copy gitfiles to home dir
-  copy: src=files/gitfiles/ dest={{ gitfiles_dir }} mode=744
+  copy: src=gitfiles/ dest={{ gitfiles_dir }} mode=744
 
 - name: Copy git files
   shell: cd {{ gitfiles_dir }} && wget {{ item }}
@@ -16,8 +16,21 @@
     - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
     - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
 
-- name: Copy bashrc
-  template: src=templates/bashrc.tpl dest=~/.bashrc
+#- name: Check bash_profile file
+#  shell: cat < ~/.bash_profile | grep '###bash_profile_generated'
+#  register: custom_bash_profile
 
-- name: Copy gitconfig
-  template: src=templates/gitconfig.tpl dest=~/.gitconfig
+#- name: Check bash_backup file
+#  stat: path=~/.bash_profile_backup
+#  register: backup_bash_profile
+
+#- name: Backup file exists
+#  fail: "File '~/.bash_profile_backup' exists! Can`t create backup file!"
+#  when: custom_bash_profile.stdout == "" and backup_bash_profile.stat.exists 
+
+#- name: Backup bash_profile if custom file exists
+#  command: mv ~/.bash_profile ~/.bash_profile_backup
+#  when: custom_bash_profile.stdout == ""
+
+- name: Copy bash_profile 
+  template: src=bash_profile.tpl dest=~/.bash_profile

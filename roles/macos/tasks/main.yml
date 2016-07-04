@@ -12,3 +12,5 @@
     - python
     - python3
     - vim
+  tags:
+    - with_update

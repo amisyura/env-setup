@@ -1,36 +1,36 @@
 - name: Creating files dirs
   file: path={{ item }} state=directory mode=755
   with_items:
-    - "{{ dotfiles_dir }}"
-    - "{{ gitfiles_dir }}"
+    - "{{ bashfiles_dir }}"
+    - "{{ includefiles_dir }}"
 
-- name: Copy dotfiles
-  copy: src=dotfiles/ dest={{ dotfiles_dir  }} mode=744
+- name: Copy bashfiles
+  copy: src=bashfiles/ dest={{ bashfiles_dir  }} mode=744
 
-- name: Copy gitfiles to home dir
-  copy: src=gitfiles/ dest={{ gitfiles_dir }} mode=744
+- name: Copy include files
+  copy: src=includefiles/ dest={{ includefiles_dir  }} mode=744
 
 - name: Copy git files
-  shell: cd {{ gitfiles_dir }} && wget {{ item }}
+  shell: cd {{ bashfiles_dir }} && wget {{ item }}
   with_items:
     - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
     - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
 
-#- name: Check bash_profile file
-#  shell: cat < ~/.bash_profile | grep '###bash_profile_generated'
-#  register: custom_bash_profile
+- name: .bash_profile file get file info
+  stat: path=~/.bash_profile
+  register: bash_profile_stat
 
-#- name: Check bash_backup file
-#  stat: path=~/.bash_profile_backup
-#  register: backup_bash_profile
+- name: Check bash_profile file
+  shell: cat ~/.bash_profile | grep {{ file_gen_flag }}
+  register: is_custom_bash_profile
+  when: bash_profile_stat.stat.exists
+  ignore_errors: True
 
-#- name: Backup file exists
-#  fail: "File '~/.bash_profile_backup' exists! Can`t create backup file!"
-#  when: custom_bash_profile.stdout == "" and backup_bash_profile.stat.exists 
+- debug: var=is_custom_bash_profile
 
-#- name: Backup bash_profile if custom file exists
-#  command: mv ~/.bash_profile ~/.bash_profile_backup
-#  when: custom_bash_profile.stdout == ""
+- name: Backup bash_profile if custom file exists
+  command: mv ~/.bash_profile ~/.bash_profile_backup
+  when: is_custom_bash_profile.changed and is_custom_bash_profile.failed
 
 - name: Copy bash_profile 
   template: src=bash_profile.tpl dest=~/.bash_profile

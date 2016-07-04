@@ -47,5 +47,5 @@
     smudge = git lfs smudge %f
     required = true
 [core]
-    excludesfile = {{ gitfiles_dir }}/.gitexclude
+    excludesfile = {{ includefiles_dir }}/.gitexclude
     editor = "vim"

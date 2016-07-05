@@ -30,7 +30,7 @@
 
 - name: Backup bash_profile if custom file exists
   command: mv ~/.bash_profile ~/.bash_profile_backup
-  when: is_custom_bash_profile.changed and is_custom_bash_profile.failed
+  when: is_custom_bash_profile.changed and is_custom_bash_profile.stdout == ""
 
 - name: Copy bash_profile 
   template: src=bash_profile.tpl dest=~/.bash_profile

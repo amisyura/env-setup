@@ -11,7 +11,7 @@
   copy: src=includefiles/ dest={{ includefiles_dir  }} mode=744
 
 - name: Copy git files
-  shell: cd {{ bashfiles_dir }} && wget {{ item }}
+  shell: cd {{ bashfiles_dir }} && wget -nc {{ item }}
   with_items:
     - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
     - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
@@ -25,8 +25,6 @@
   register: is_custom_bash_profile
   when: bash_profile_stat.stat.exists
   ignore_errors: True
-
-- debug: var=is_custom_bash_profile
 
 - name: Backup bash_profile if custom file exists
   command: mv ~/.bash_profile ~/.bash_profile_backup

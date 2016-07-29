@@ -16,19 +16,21 @@
     - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
     - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
 
-- name: .bash_profile file get file info
-  stat: path=~/.bash_profile
-  register: bash_profile_stat
+- name: bashfile file get file info
+  stat: path={{ bashfile_path }}
+  register: bashfile_stat
 
 - name: Check bash_profile file
-  shell: cat ~/.bash_profile | grep {{ file_gen_flag }}
-  register: is_custom_bash_profile
-  when: bash_profile_stat.stat.exists
+  shell: cat {{ bashfile_path }} | grep {{ file_gen_flag }}
+  register: is_custom_bashfile
+  when: bashfile_stat.stat.exists
   ignore_errors: True
 
+- debug: var=is_custom_bashfile verbosity=1
+
 - name: Backup bash_profile if custom file exists
-  command: mv ~/.bash_profile ~/.bash_profile_backup
-  when: is_custom_bash_profile.changed and is_custom_bash_profile.stdout == ""
+  command: mv {{ bashfile_path }} {{ bashfile_backup_path }}
+  when: is_custom_bashfile.changed and is_custom_bashfile.stdout == ""
 
 - name: Copy bash_profile 
-  template: src=bash_profile.tpl dest=~/.bash_profile
+  template: src=bashfile.tpl dest={{ bashfile_path }}

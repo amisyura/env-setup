@@ -7,3 +7,6 @@ export LC_ALL='en_US.UTF-8';
 
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
+
+#php 5.6 path
+#export PATH="$(brew --prefix php56)/bin:$PATH"

@@ -1,5 +1,8 @@
 - name: Update and upgrade Homebrew
   homebrew: update_homebrew=yes upgrade_all=yes
+  tags:
+    - brew
+    - upgrade
 
 - name: Homebrew install packages
   homebrew: name={{ item }} state=latest
@@ -10,3 +13,5 @@
     - python
     - python3
     - vim
+  tags:
+    - brew

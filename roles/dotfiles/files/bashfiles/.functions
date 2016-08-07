@@ -1,0 +1,3 @@
+function __git_ps1_mod {
+  echo $(__git_ps1 '[ %s ]') | sed -e 's/%/💩 /;s/+/🐵 /;s/*/🙈 /;s/<>/🔗/;s/=//';
+}

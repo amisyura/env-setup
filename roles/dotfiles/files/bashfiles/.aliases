@@ -1,0 +1,19 @@
+alias ll="ls -lahF"
+alias mkdir="mkdir -p"
+alias g="git"
+alias grep="grep --color=auto"
+
+#Shortcuts
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+alias cddl="cd ~/Downloads"
+alias cdyd="cd ~/Яндекс.Диск/"
+alias cddoc="cd ~/Documents"
+alias cddev="cd ~/dev"
+
+#tools
+alias scleanup="find . -type f \( -name '*.DS_Store' -o -name '._*' \) -ls"
+alias cleanup="find . -type f \( -name '*.DS_Store' -o -name '._*' \) -ls -delete"

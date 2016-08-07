@@ -24,4 +24,6 @@ else
 fi
 
 # todo: get ansible playbooks to tmp folder and run it!
-ansible-playbook playbook.yml -i inventory.ini
+ansible-playbook playbook.yml -i inventory.ini --skip-tags "brew"
+
+source ~/.bashrc

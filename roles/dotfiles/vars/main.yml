@@ -1,0 +1,5 @@
+bashfiles_dir: "~/.bashfiles"
+includefiles_dir: "~/.includefiles"
+file_gen_flag: "*=bash_profile_generated=*"
+bashfile_path: "~/.bashrc"
+bashfile_backup_path: "~/.bashrc_backup"

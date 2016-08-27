@@ -5,12 +5,13 @@ BASHFILE_PATH = ~/.bashrc
 ANSIBLE_PLAYBOOK_RUN := ansible-playbook $(PRJ_ROOT)/playbook.yml -i $(PRJ_ROOT)/inventory.ini
 
 .PHONY: all
-all:
-	@echo "Nothing to do here"
+all: deps backup ansible.run.all refresh 
 
-.PHONY: install.deps
-install.deps:
-	@echo "Install dependencies"
+.PHONY: install
+install: backup ansible.run.no-packages refresh
+
+.PHONY: deps
+deps: clt.get brew.get ansible.get
 
 # Mac Command Line Tools install
 .PHONY: clt.get
@@ -58,17 +59,31 @@ ansible.run.no-packages:
 .PHONY: restore backup refresh
 
 restore:
-	@echo "Coming back"
+	$(info ==> Restore bash file)
+	$(eval BASHFILE_BACKUP_PATH := $(shell find ~/ -name ".bashrc_*" | sort -r | head -n 1))
+	@ if [ -f $(BASHFILE_BACKUP_PATH) ]; then \
+		rm -f $(BASHFILE_PATH); \
+		mv $(BASHFILE_BACKUP_PATH) $(BASHFILE_PATH); \
+		echo "====> Restore $(BASHFILE_BACKUP_PATH)"; \
+	else \
+		echo "====> Nothing restore..."; \
+	fi
 
 backup:
 	$(info ==> Backup bash file)
 	@ if [ -f $(BASHFILE_PATH) ]; then \
 		$(eval BASHFILE_BACKUP_PATH := $(BASHFILE_PATH)_$(shell date "+%Y-%m-%d_%H:%M:%S")) \
-		echo "Backup $(BASHFILE_PATH) to $(BASHFILE_BACKUP_PATH)"; \
+		echo "====> Backup $(BASHFILE_PATH) to $(BASHFILE_BACKUP_PATH)"; \
 		cp $(BASHFILE_PATH) $(BASHFILE_BACKUP_PATH); \
 	else \
-		echo "====> Ansible already exists"; \
+		echo "====> Nothing to backup"; \
 	fi
 
 refresh:
-	source $(BASHFILE_PATH)
+	@ if [ -f $(BASHFILE_PATH) ]; then \
+		echo "====> Refresh $(BASHFILE_PATH)"; \
+		source $(BASHFILE_PATH); \
+	else \
+		echo "====> Nothing refresh"; \
+	fi
+

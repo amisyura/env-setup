@@ -1,6 +1,16 @@
 - hosts: all
+#  vars_prompt:
+#    - name: "username"
+#      prompt: "Enter system username"
+#      default: "{{ ansible_user_id }}"
+#      private: no
+#
+#    - name: "email"
+#      prompt: "Enter email"
+#      private: no
+
   roles:
     - common
-    - macos
+    - git
     - dotfiles
-    
+    - workmode

@@ -1,0 +1,32 @@
+- name: Copy workmode script
+  copy: src=workmode.sh dest={{ workmode_path }} mode=0777
+  tags:
+    - workmode
+
+- name: Copy workmode launchD plist
+  template: src=com.workmode.on.plist.tpl dest=/Library/LaunchDaemons/com.workmode.on.plist mode=0644 owner=root group=wheel
+  become: yes
+  become_user: root
+  tags:
+    - workmode
+
+- name: Copy workmode launchD plist
+  template: src=com.workmode.off.plist.tpl dest=/Library/LaunchDaemons/com.workmode.off.plist mode=0644 owner=root group=wheel
+  become: yes
+  become_user: root
+  tags:
+    - workmode
+
+#- name: Load launchD
+#  shell: launchctl load -w /Library/LaunchDaemons/com.workmode.on.plist
+#  become: yes
+#  become_user: root
+#  tags:
+#    - workmode
+#
+#- name: Load launchD
+#  shell: launchctl load -w /Library/LaunchDaemons/com.workmode.off.plist
+#  become: yes
+#  become_user: root
+#  tags:
+#    - workmode

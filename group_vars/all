@@ -1,0 +1,3 @@
+env_dir: "{{ ansible_user_dir }}/.env"
+scripts_dir: "{{ env_dir }}/scripts"
+bin_dir: "/usr/local/bin"

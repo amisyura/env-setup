@@ -1,0 +1,36 @@
+- name: Install Git with homebrew
+  homebrew: name=git state=latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - git
+    - package-install
+
+- name: Install Git
+  apt: name=git state=latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - git
+    - package-install
+
+- name: Create .env directory
+  file: path={{ git_dir }} state=directory mode=0755
+  tags:
+    - git
+
+- name: Copy gitignore
+  copy: src=.gitignore dest={{ env_dir }}/git/.gitignore
+  tags:
+    - git
+
+- name: Copy gitconfig
+  template: src=gitconfig.tpl dest=~/.gitconfig
+  tags:
+    - git
+
+- name: Download git completion
+  shell: cd {{ env_dir }}/git/ && wget -nc {{ item }}
+  with_items:
+    - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
+    - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
+  tags:
+    - git

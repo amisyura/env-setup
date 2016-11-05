@@ -1,0 +1,1 @@
+git_dir: "{{ env_dir }}/git"

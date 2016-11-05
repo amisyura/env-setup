@@ -1,2 +1,16 @@
-- name: Create development dirictory
+- name: Create development directory
   file: path=~/dev state=directory mode=0755
+  tags:
+    - common
+
+- name: Create .env directory
+  file: path={{ env_dir }} state=directory mode=0755
+  tags:
+    - common
+
+- name: Create .env/scripts directory
+  file: path={{ scripts_dir }} state=directory mode=0755
+  tags:
+    - common
+
+- include: "MacOSX.yml"

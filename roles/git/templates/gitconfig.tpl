@@ -1,12 +1,13 @@
 [user]
     name = {{ ansible_user_id }}
+    email = "misuraa@gmail.com"
 [github]
-    name = amisyura
+    name = {{ ansible_user_id }}
 [i18n]
     commitEncoding = utf-8
 [alias]
     hist = log --date=short --pretty=format:\"%h %ad |    %ae (%an)    |  %s%d\"
-    myhist = hist --all --author=amisyura
+    myhist = hist --all --author={{ ansible_user_id }}
     co = checkout
     ci = commit
     st = status
@@ -47,5 +48,5 @@
     smudge = git lfs smudge %f
     required = true
 [core]
-    excludesfile = {{ includefiles_dir }}/.gitexclude
+    excludesfile = {{ env_dir }}/git/.gitignore
     editor = "vim"

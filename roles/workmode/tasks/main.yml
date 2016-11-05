@@ -1,0 +1,9 @@
+- name: Copy workmode script
+  copy: src=workmode.sh dest={{ scripts_dir }}/workmode.sh mode=0777
+  tags:
+    - workmode
+
+- name: Linked workmode script
+  file: src={{ scripts_dir }}/workmode.sh dest={{ bin_dir }}/workmode state=link
+  tags:
+    -workmode

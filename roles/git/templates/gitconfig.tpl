@@ -1,13 +1,13 @@
 [user]
-    name = {{ ansible_user_id }}
-    email = "misuraa@gmail.com"
+    name = {{ username }}
+    email = {{ email }}
 [github]
-    name = {{ ansible_user_id }}
+    name = {{ username }}
 [i18n]
     commitEncoding = utf-8
 [alias]
     hist = log --date=short --pretty=format:\"%h %ad |    %ae (%an)    |  %s%d\"
-    myhist = hist --all --author={{ ansible_user_id }}
+    myhist = hist --all --author={{ username }}
     co = checkout
     ci = commit
     st = status

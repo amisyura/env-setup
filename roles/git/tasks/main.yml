@@ -12,13 +12,18 @@
     - git
     - package-install
 
-- name: Create .env directory
+- name: Create git directory
   file: path={{ git_dir }} state=directory mode=0755
   tags:
     - git
 
 - name: Copy gitignore
   copy: src=.gitignore dest={{ env_dir }}/git/.gitignore
+  tags:
+    - git
+
+- name: Copy .ps1 for git
+  template: src=ps1.tpl dest={{ dotfiles_dir }}/.ps1
   tags:
     - git
 

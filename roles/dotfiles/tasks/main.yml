@@ -7,3 +7,8 @@
   template: src=bashfile.tpl dest={{ bashfile_path }} mode=744
   tags:
     - dotfiles
+
+- name: Copy profile
+  template: src=profile.tpl dest=~/.profile mode=744
+  tags:
+    - dotfiles

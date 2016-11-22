@@ -9,12 +9,12 @@
     - workmode
 
 - name: Alias workmode on
-  shell: echo "alias workmode_on=\"{{ workmode_path }} on {{ workmode_denyfile_path }} /etc/hosts\"" >> {{ dotfiles_dir }}/.aliases
+  shell: echo "alias workmode_on=\"sudo {{ workmode_path }} on {{ workmode_denyfile_path }} /etc/hosts\"" >> {{ dotfiles_dir }}/.aliases
   tags:
     - workmode
 
 - name: Alias workmode off
-  shell: echo "alias workmode_off=\"{{ workmode_path }} off {{ workmode_denyfile_path }} /etc/hosts\"" >> {{ dotfiles_dir }}/.aliases
+  shell: echo "alias workmode_off=\"sudo {{ workmode_path }} off {{ workmode_denyfile_path }} /etc/hosts\"" >> {{ dotfiles_dir }}/.aliases
   tags:
     - workmode
 

@@ -80,10 +80,6 @@ backup:
 	fi
 
 refresh:
-	@ if [ -f $(BASHFILE_PATH) ]; then \
-		echo "====> Refresh $(BASHFILE_PATH)"; \
-		source ~/.bashrc; \
-	else \
-		echo "====> Nothing refresh"; \
-	fi
+	exec bash
+	echo "Refresh"
 

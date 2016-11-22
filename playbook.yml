@@ -13,5 +13,4 @@
     - common
     - dotfiles
     - git
-    
-    #- workmode
+    - workmode

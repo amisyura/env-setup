@@ -2,7 +2,6 @@
   vars_prompt:
     - name: "username"
       prompt: "Enter system username"
-      default: "{{ ansible_user_id }}"
       private: no
 
     - name: "email"

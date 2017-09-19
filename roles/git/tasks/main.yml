@@ -32,10 +32,12 @@
   tags:
     - git
 
-- name: Download git completion
-  shell: cd {{ env_dir }}/git/ && wget -nc {{ item }}
-  with_items:
-    - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
-    - "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
+- name: Copy git-completion.bash
+  copy: src=git-completion.bash dest={{ env_dir }}/git/git-completion.bash
+  tags:
+    - git
+
+- name: Copy git-prompt.sh 
+  copy: src=git-prompt.sh dest={{ env_dir }}/git/git-prompt.sh
   tags:
     - git

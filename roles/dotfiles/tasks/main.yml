@@ -12,3 +12,8 @@
   template: src=profile.tpl dest=~/.profile mode=744
   tags:
     - dotfiles
+
+- name: Copy ssh config
+  template: src=ssh.config.tpl dest=~/.ssh/config mode=744
+  tags:
+    - dotfiles

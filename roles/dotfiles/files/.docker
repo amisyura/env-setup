@@ -1,2 +1,2 @@
-alias composer='docker run --rm -v "$PWD":/app composer/composer'
+alias composer='docker run --rm -it -v "$PWD":/app -v "$HOME"/.ssh:/root/.ssh amisyura/composer'
 

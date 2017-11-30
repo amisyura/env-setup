@@ -13,6 +13,8 @@
     st = status
     br = branch
     su = submodule
+    p = push
+    pu = push -u origin
 [color]
     branch = auto
     diff = auto

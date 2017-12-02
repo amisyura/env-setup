@@ -1,6 +1,6 @@
 [user]
     name = {{ username }}
-    email = {{ email }}
+    email = {{ useremail }}
 [github]
     name = {{ username }}
 [i18n]

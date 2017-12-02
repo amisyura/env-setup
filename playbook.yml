@@ -1,13 +1,8 @@
 - hosts: all
-  vars_prompt:
-    - name: "username"
-      prompt: "Enter system username"
-      private: no
-
-    - name: "email"
-      prompt: "Enter email"
-      private: no
-
+  
+  vars_files: 
+    - default.vars.yml
+    
   roles:
     - common
     - dotfiles

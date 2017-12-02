@@ -5,7 +5,10 @@ BASHFILE_PATH = ~/.bashrc
 ANSIBLE_PLAYBOOK_RUN := ansible-playbook $(PRJ_ROOT)/playbook.yml -i $(PRJ_ROOT)/inventory.ini
 
 .PHONY: all
-all: deps backup ansible.run.all refresh 
+all: deps backup ansible.run.all refresh
+
+.PHONY: tags
+tags: 
 
 .PHONY: install
 install: backup ansible.run.no-packages refresh
@@ -47,10 +50,16 @@ ansible.get:
 	fi
 
 # Ansible targets
-.PHONY: ansible.run.all ansible.run.no-packages
+.PHONY: ansible.run.all ansible.run.tags ansible.run.skip-tags ansible.run.no-packages
 
 ansible.run.all:
 	$(ANSIBLE_PLAYBOOK_RUN)
+
+ansible.run.tags:
+	$(ANSIBLE_PLAYBOOK_RUN) --tags "$(tags)"
+
+ansible.run.skip-tags:
+	$(ANSIBLE_PLAYBOOK_RUN) --skip-tags "$(tags)"
 
 ansible.run.no-packages:
 	$(ANSIBLE_PLAYBOOK_RUN) --skip-tags "brew"

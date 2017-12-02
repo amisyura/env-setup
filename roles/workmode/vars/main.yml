@@ -1,3 +1,0 @@
-workmode_path: "{{ scripts_dir }}/workmode.sh"
-workmode_bin_path: "{{ bin_dir }}/workmode"
-workmode_denyfile_path: "{{ ansible_user_dir }}/.denyhosts"

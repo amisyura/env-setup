@@ -2,6 +2,7 @@
   homebrew: name=git state=latest
   when: ansible_distribution == "MacOSX"
   tags:
+    - brew
     - git
     - package-install
 

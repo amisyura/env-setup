@@ -1,0 +1,7 @@
+set nocompatible
+
+let $PATH = $PATH . ':' . expand("~/.local/bin") . ':' . expand("~/.composer/vendor/bin")
+
+call plug#begin('~/.vim/plugged')
+
+call plug#end()

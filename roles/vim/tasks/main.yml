@@ -1,0 +1,35 @@
+- name: Install Vim with homebrew
+  homebrew: name=vim state=latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - vim
+    - package-install
+    - brew
+
+- name: Install Vim
+  apt: name=vim state=latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - vim
+    - package-install
+
+- file: path={{ vim_dir }}/{{ item }} state=directory mode=0755
+  with_items:
+    - autoload
+    - spell
+  tags:
+    - vim
+
+- name: Copy plug.vim
+  file: src={{ item }} dest={{ vim_dir }}/autoload
+  with_items:
+    - plug.vim
+  tags:
+    - vim
+
+- name: Copy vimrc
+  copy: src={{ item }} dest=~/.{{ item }}
+  with_items:
+    - vimrc
+  tags:
+    - vim

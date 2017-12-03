@@ -4,4 +4,11 @@ let $PATH = $PATH . ':' . expand("~/.local/bin") . ':' . expand("~/.composer/ven
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'tpope/vim-surround'
+Plug 'w0rp/ale'
+Plug 'scrooloose/nerdtree'
+Plug 'nanotech/jellybeans.vim'
+
 call plug#end()

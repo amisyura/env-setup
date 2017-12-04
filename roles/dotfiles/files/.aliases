@@ -18,3 +18,5 @@ alias cddev="cd ~/dev"
 #tools
 alias scleanup="find . -type f \( -name '*.DS_Store' -o -name '._*' \) -ls"
 alias cleanup="find . -type f \( -name '*.DS_Store' -o -name '._*' \) -ls -delete"
+
+alias br="source ~/.bashrc"

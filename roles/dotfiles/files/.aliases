@@ -22,4 +22,4 @@ alias cleanup="find . -type f \( -name '*.DS_Store' -o -name '._*' \) -ls -delet
 alias br="source ~/.bashrc"
 
 #syncd
-alias sd="syncd"
+alias s="syncd"

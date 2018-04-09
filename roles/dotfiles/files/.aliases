@@ -15,6 +15,7 @@ alias cddl="cd ~/Downloads"
 alias cdyd="cd ~/Яндекс.Диск/"
 alias cddoc="cd ~/Documents"
 alias cddev="cd ~/dev"
+alias cdw="cd ~/dev/work"
 
 #tools
 alias scleanup="find . -type f \( -name '*.DS_Store' -o -name '._*' \) -ls"
